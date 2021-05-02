@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit {{selectedBook.title}}</title>
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'style_editbook.css'%}">
+</head>
+<body>
+    <div id="wrapper">
+        <div id="header">
+            <a href="/logOut" id="logOutLink"><button>Log Out</button></a> |
+            <a href="/home"><button>Library</button></a>
+        </div>
+        <h1>Edit: <a href="/bookDetails/{{selectedBook.id}}" class="infoType">{{selectedBook.title}}</a></h1>
+        <div id="editForm">
+            <form action="/editBook/{{selectedBook.id}}" method="POST">
+                {% csrf_token %}
+                <p><span class="infoType">Title:</span> <input type="text" name="title" value="{{selectedBook.title}}" id=""></p>
+                <p><span class="infoType">Added By:</span> Added by: {{selectedBook.uploaded_by.first_name}}</p>
+                <p><span class="infoType">Added On:</span>  {{selectedBook.created_at}}</p>
+                <p><span class="infoType">Last Updated At:</span>  {{selectedBook.updated_at}}</p>
+                <p><span class="infoType">Description:</span></p>  <textarea name="desc" id="descInput" cols="20" rows="5" >{{selectedBook.desc}}</textarea>
+                <input type="submit" value="Update"> | <a href="/delete/{{selectedBook.id}}"><button>Delete</button></a>
+            </form>
+        </div>
+        <div id="UsersWhoLike">
+            {% for user in allUsers %}
+            <ul>
+                <li></li>               <!--Users who like this book & link to UN-favorite-->
+            </ul>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,36 @@
+#wrapper{
+    width: 1200px;
+    height: fit-content;
+    margin: 0px auto;
+    outline: red solid 1px;
+    background: rgb(46,85,143);
+background: linear-gradient(0deg, rgba(46,85,143,1) 19%, rgba(30,126,230,1) 100%);
+font-family: Verdana, Geneva, Tahoma, sans-serif;
+padding: 25px;
+}
+h1{
+    display: inline-block;
+}
+#pageLink{
+    vertical-align: top;
+    margin-left: 600px;
+}
+h2{
+    display: inline-block;
+    margin-right: 100px;
+    vertical-align: top;
+}
+#addForm{
+    display: inline-block;
+    margin-bottom: 20px;
+}
+#allBooksDiv{
+    display: inline-block;
+    margin: 0px auto;
+}
+.bookLink{
+    color: rgba(255, 230, 0, 0.76);
+}
+.tableHead{
+    text-decoration: underline;
+}

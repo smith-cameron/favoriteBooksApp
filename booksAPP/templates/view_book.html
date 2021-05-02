@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{selectedBook.title}}</title>
+    {%load static%}
+    <link rel="stylesheet" href="{% static '/style_viewbook.css'%}">
+</head>
+<body>
+    <div id="wrapper">
+        <div id="header">
+            <a href="/logOut" id="pageLink"><button>Log Out</button></a> |
+            {%if selectedBook.uploaded_by.id == user.id%}
+            <a href="/editBook/{{selectedBook.id}}" id="pageLink"><button>Edit</button></a> |
+            {%endif%}
+            <a href="/home" id="pageLink"><button>Library</button></a>
+        </div>
+        <h1>{{selectedBook.title}}</h1>
+        <div id="bookInfo">
+            <h2></h2>
+            <p><span class="infoType">Added by:</span>  {{selectedBook.uploaded_by.first_name}}</p>
+            <p><span class="infoType">Added On:</span> {{selectedBook.created_at}}</p>
+            <p><span class="infoType">Last Updated On:</span> {{selectedBook.updated_at}}</p>
+            <p id="description"><span class="infoType">Description:</span> {{selectedBook.desc}}</p>
+        </div>
+        <div id="UsersWhoLike">
+            <h3>People who like this book!</h3>
+            {% for user in selectedBook.users_who_like.all %}
+            <ul>
+                <li>{{user.first_name}} {{user.last_name}}</li>
+            </ul>
+            {% endfor %}
+            {%if user not in selectedBook.users_who_like.all%}
+            <form action="like_book_detail/{{selectedBook.id}}" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="Like">
+            {%endif%}
+            {%if user in selectedBook.users_who_like.all%}
+            <form action="/unlike_book_detail/{{selectedBook.id}}" method="POST">
+                {% csrf_token %}
+                <input type="submit" value="UnLike">
+            {%endif%}
+        </div>
+    </div>
+</body>
+</html>

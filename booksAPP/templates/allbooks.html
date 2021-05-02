@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Books</title>
+    {%load static%}
+    <link rel="stylesheet" href="{% static 'style_allbooks.css'%}">
+</head>
+<body>
+    <div id="wrapper">
+        <div id="header">
+            <h1>Welcome, {{user.first_name}} {{user.last_name}}!</h1>
+            <a href="/logOut" id="pageLink"><button>Log Out</button></a>
+        </div>
+        <div id="addFormDiv">
+            <h2>Add a Favorite Book</h2>
+            <form action="/addBook" id="addForm" method="POST">
+                {% csrf_token %}
+                Title:<input type="text" name="title" id="titleInput">
+                Description:<textarea name="desc" id="descInput" cols="20" rows="5"></textarea>
+                <input type="submit" value="ADD">
+            </form>
+        </div>
+        <h2>Library of all Books</h2>
+        <div id="allBooksDiv">
+            <table>
+                <tr>
+                    <th></th>
+                    <th class="tableHead">Added By:</th>
+                </tr>
+                {%for book in allBooks%}
+                <tr>
+                    {%if book.uploaded_by != user.id%}
+                    <td><a href="/bookDetails/{{book.id}}" class="bookLink">{{book.title}}</a></td>
+                    {%endif%}
+                    {%if book.uploaded_by == user.id%}
+                    <td><a href="/editBook/{{book.id}}" class="bookLink">{{book.title}}</a></td>
+                    {%endif%}
+                    <td>{{book.uploaded_by.first_name}} {{book.uploaded_by.last_name}}</td>
+                    {%if user in book.users_who_like.all%}
+                    <td><a href="/unlike_book/{{book.id}}"><button>UnLike</button></a></td>
+                    {%elif user != book.users_who_like.all%}
+                    <td><a href="/like_book/{{book.id}}"><button>Like</button></a></td>
+                    {%endif%}
+                </tr>
+                {%endfor%}
+            </table>
+        </div>
+    </div>
+</body>
+</html>

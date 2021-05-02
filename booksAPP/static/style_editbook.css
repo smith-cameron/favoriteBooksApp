@@ -1,0 +1,32 @@
+#wrapper{
+    width: 1200px;
+    height: fit-content;
+    margin: 0px auto;
+    outline: red solid 1px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background: rgb(46,85,143);
+background: linear-gradient(0deg, rgba(46,85,143,1) 19%, rgba(30,126,230,1) 100%);
+padding: 25px;
+}
+#messages{
+    color: red;
+}
+h1{
+    display: inline-block;
+}
+#header{
+    display: inline-block;
+    padding-left: 950px;
+    vertical-align: top;
+}
+.infoType{
+    text-decoration: underline;
+    color: rgba(255, 230, 0, 0.76);
+}
+#descInput{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding: 5px;
+}
+#editForm{
+    margin-left: 100px;
+}
